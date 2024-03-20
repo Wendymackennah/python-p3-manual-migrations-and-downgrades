@@ -36,3 +36,21 @@ def downgrade() -> None:
     op.drop_index(op.f('ix_students_name'), table_name='students')
     op.drop_table('students')
     # ### end Alembic commands ###
+
+
+
+
+
+def upgrade():
+    # Rename the column using op.alter_column
+        op.alter_column(
+        'students',  # Specify the table name
+        'name',  # Specify the old column name
+        new_column_name='firstname',  # Specify the new column name
+        type_=sa.String(255),  # Specify the new column type if changing
+        nullable=True,  # Specify the new nullable value if changing
+        existing_type=sa.String(255),  # Specify the existing column type
+        existing_server_default=None,  # Specify the existing server default if changing
+        existing_nullable=True,  # Specify the existing nullable value
+    )
+
